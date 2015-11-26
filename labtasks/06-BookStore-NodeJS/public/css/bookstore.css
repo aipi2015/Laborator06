@@ -1,0 +1,158 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	height: 100%;
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #888;
+	font-size: 13px;
+	line-height: 20px;
+	min-width: 998px;
+	background:url(../images/user_interface/background.jpg) repeat;
+}
+
+#wrapperabsolute {	
+	padding: 50px 0 0 0px;
+	width: 350px;
+	height: 100%;
+	position: relative;
+	margin: auto;
+	vertical-align: middle;
+}
+
+#wrapperrelative {	
+	padding: 0px 0px 0px 0px;
+	width: 100%;
+	position: relative;
+	display: inline;
+	margin: 0px;
+}
+
+#wrappertop {
+	background: url(../images/user_interface/wrapper_top_left.png) no-repeat, url(../images/user_interface/wrapper_top_right.png) no-repeat, url(../images/user_interface/wrapper_top_center.png) repeat-x;
+	background-position: top left, top right, top center;
+	position: relative;
+	display: inline-block;
+	vertical-align: bottom;
+	float: center;
+	width: 100%;
+	height: 19px;
+}
+
+#wrappermiddle {
+	background: url(../images/user_interface/wrapper_middle_left.png) repeat-y, url(../images/user_interface/wrapper_middle_right.png) repeat-y, url(../images/user_interface/wrapper_middle_center.png);
+	background-position: top left, top right, top center;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	float: center;
+	width: 100%;
+}
+
+#wrapperbottom {
+	background: url(../images/user_interface/wrapper_bottom_left.png) no-repeat, url(../images/user_interface/wrapper_bottom_right.png) no-repeat, url(../images/user_interface/wrapper_bottom_center.png) repeat-x;
+	background-position: top left, top right, top center;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	float: center;
+	width: 100%;
+	height: 19px;
+}
+
+#wrapperabsolute h2 {
+	margin-left: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: Myriad Pro;
+	text-transform: uppercase;
+	position: absolute;
+	text-shadow: #fff 2px 2px 2px;
+}
+
+#wrapperabsolute h3 {
+	float: left;
+	margin-left: 20px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: Myriad Pro;
+	position: relative;
+}
+
+#username_input {
+	margin-left: 25px;
+	position: absolute;
+	width: 300px;
+	height: 50px;
+	margin-top: 40px;
+}
+
+#password_input {
+	margin-left: 25px;
+	position: absolute;
+	width: 300px;
+	height: 50px;
+	margin-top: 100px;
+}
+
+#field_inputleft {
+	float: left;
+	background: url(../images/user_interface/input_left.png) no-repeat;
+	width: 12px;
+	height: 50px;
+}
+
+#field_inputmiddle {
+	float: left;
+	background: url(../images/user_interface/input_middle.png) repeat-x;
+	width: 276px;
+	height: 50px;
+}
+
+#field_inputright {
+	float: left;
+	background: url(../images/user_interface/input_right.png) no-repeat;
+	width: 12px;
+	height: 50px;
+}
+
+#url{
+	display: block;
+	width: 276px;
+	height: 45px;
+	background: transparent;
+	border: 0;
+	color: #bdbdbd;
+	font-family: helvetica, sans-serif;
+	font-size: 14px;
+	padding-left: 20px;
+}
+
+#url_field {
+	position: absolute;
+	display: block;
+	margin-top: -28px;
+	float: left;
+	padding-right: 10px;
+}
+
+#submit{
+	float: left;
+	position: relative;
+	padding: 0;
+	margin-top: 160px;
+	margin-left: 25px;
+	width: 300px;
+	height: 40px;
+	border: 0;
+}
+
+th { font-size: 14px; background-color: #555555; color:#ffffff; }
+td { font-size: 14px; margin-top: 20px;}
+
+a         { text-decoration: none; }
+a:active  { color: green; }
+a:hover   { color: gray; text-decoration: underline; }
+

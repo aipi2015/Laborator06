@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+        <title>BookStore</title>
+        <link rel="stylesheet" type="text/css" href="css/bookstore.css" />
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    </head>
+    <body style="text-align: center">
+        <h2>BOOKSTORE</h2>
+        <form action="/administrator" method="post" name="administrator_form">
+            <p style="text-align: right">
+                Welcome, <%= display %> 
+                <br /> 
+                <input type="image" name="signout" value="signout" src="./images/user_interface/signout.png" />
+                <br />
+            </p>
+            <h2>Administration Page</h2>
+            <p style="margin-left: auto; margin-right: auto">
+                <select name="current_table" onchange="document.administrator_form.submit()">
+                    <% for (var index = 0; index < databaseStructure.length; index++) {
+                       if (currentTable === databaseStructure[index]) { %>
+                            <option value="<%= databaseStructure[index] %>" selected><%= databaseStructure[index] %></option>
+                        <% } else { %>
+                            <option value="<%= databaseStructure[index] %>"><%= databaseStructure[index] %></option>
+                        <% }
+                    } %>
+                </select>
+            </p>
+            <table style="background: #ffffff; margin: 0px auto;" border="0" cellpadding="4" cellspacing="1">
+                <tbody>
+                    <tr>
+                        <% for (var index = 0; index < attributes.length; index++) { %>
+                            <th> <%= attributes[index] %> </th>
+                        <% } %>
+			<th colspan="2">operation</th>
+                    </tr>
+                    <tr style="background: #ebebeb">
+                        <% for (var index = 0; index < attributes.length; index++) {
+                            if (identifier === attributes[index]) { %>
+                                <td><input type="text" name="<%= attributes[index] %>_insert" value="<%= identifierNextValue + 1 %>" disabled="disabled" /></td>
+                            <% } else { %>
+                                <td><input type="text" name="<%= attributes[index] %>_insert"/></td>
+                            <% } 
+                        } %>
+			<td style="text-align: center;" colspan="2"><input type="image" name="insert" value="Insert" src="./images/user_interface/insert.png" /></td>
+                    </tr>
+                    <% for (var index1 = 0; index1 < tableContent.length; index1++) { 
+                        var currentIdentifier = tableContent[index1][attributes[0]];
+                    %>
+                        <tr style="background: #ebebeb">
+                            <% var isEditableRecord = false;
+                            if (identifierRecordToBeUpdated && identifierRecordToBeUpdated == currentIdentifier) {
+                                isEditableRecord = true;
+                            } 
+                            var updateSuffix;
+                            if (isEditableRecord === true) {
+                                updateSuffix = 2;
+                            } else {
+                                updateSuffix = 1;
+                            }
+                            %>
+                            <% for (var index2 = 0; index2 < attributes.length; index2++) { %>
+                                <% if (isEditableRecord === true) { %>
+                                    <td>
+                                        <input type="text" name="<%= attributes[index2] %>_<%= currentIdentifier %>_update" value="<%= tableContent[index1][attributes[index2]] %>"
+                                        <% if (index2 === 0) { %>
+                                            disabled
+                                        <% } %>
+                                        />
+                                    </td>
+                                <% } else { %>
+                                    <td><%= tableContent[index1][attributes[index2]] %></td>
+                                <% } %>
+                            <% } %>
+                            <td><input type="image" name="update<%= updateSuffix %>_<%= currentIdentifier %>" value="Update" src="./images/user_interface/update.png" /></td>
+                            <td><input type="image" name="delete_<%= currentIdentifier %>" value="Delete" src="./images/user_interface/delete.png" /></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>
