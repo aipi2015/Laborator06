@@ -1,0 +1,15 @@
+{
+    "name": "06-BookStore-NodeJS",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "Andrei",
+    "contributors": [],
+    "dependencies": {
+        "express": "^4.10.6",
+        "mysql": "^2.5.4",
+        "ejs": "^1.0.0",
+        "body-parser": "1.8",
+        "serve-favicon": "2",
+        "express-session": "^1.7.6"
+    }
+}

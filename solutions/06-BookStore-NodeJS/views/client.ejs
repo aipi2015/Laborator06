@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+        <title>BookStore</title>
+        <link rel="stylesheet" type="text/css" href="css/bookstore.css" />
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    </head>
+    <body>
+	<h2 style="text-align: center">BOOKSTORE</h2>
+	<form action="/client" method="post" name="client_form">
+            <p style="text-align: right">
+                Welcome, <%= display %> 
+                <br /> 
+                <input type="image" name="signout" value="signout" src="./images/user_interface/signout.png" />
+                <br />
+            </p>
+            <h2 style="text-align: center">Book Catalog</h2>
+            <p style="text-align: right">
+		Records per Page
+                <input type="hidden" name="previousrecordsperpage" value="<%= previousRecordsPerPageValue %>" />
+		<select name="recordsperpage" onchange="document.client_form.submit()">
+                    <% for (var index = 0; index < recordsPerPageValues.length; index++) { %>
+                        <option value="<%= recordsPerPageValues[index] %>"
+                            <% if (recordsPerPageValue == recordsPerPageValues[index]) { %>
+                                selected
+                            <% } %>
+                        >
+                            <%= recordsPerPageValues[index] %>
+                        </option>
+                    <% } %>
+		</select>
+                <% var numberOfPages = (books.length / recordsPerPageValue) + ((books.length % recordsPerPageValue) ? 1 : 0) %>
+                Page
+		<select name="page" onchange="document.client_form.submit()">
+                    <% for (var index = 1; index <= numberOfPages; index++) { %>
+                        <option value="<%= index %>"
+                            <% if (pageValue == index) { %>
+                                selected
+                            <% } %>
+                        >
+                            <%= index %>
+                        </option>
+                    <% } %>
+		</select>
+            </p>
+            <table border="0" cellpadding="4" cellspacing="1" style="width: 100%; background-image: url(./images/user_interface/background.jpg); margin: 0px auto;">
+                <tbody>
+                    <tr>
+                        <td style="width: 20%; text-align: left; vertical-align: top">
+                            <div id="wrapperrelative">
+                                <div id="wrappertop"></div>
+				<div id="wrappermiddle">
+                                    <table border="0" cellpadding="4" cellspacing="1">
+					<tbody>
+                                            <tr>
+						<td>Format:</td>
+						<td>
+                                                    <select name="currentFormat" style="width: 100%">
+                                                        <% for (var index = 0; index < formatsList.length; index++) { %>
+                                                            <option value="<%= formatsList[index] %>"><%= formatsList[index] %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+						<td><input type="image" name="insert_format" src="./images/user_interface/insert.png" /></td>
+                                            </tr>
+                                            <tr>
+						<td colspan="3">
+                                                    <table>
+                                                        <% for (var index = 0; index < formatsFilter.length; index++) { %>
+                                                            <tr>
+                                                                <td style="background: #ebebeb; text-align: left;">
+                                                                    <%= formatsFilter[index] %>
+                                                                </td>
+								<td><input type="image" name="delete_format_<%= formatsFilter[index] %>" src="./images/user_interface/delete.png" width="16" height="16" /></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table>
+						</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Language:</td>
+						<td>
+                                                    <select name="currentLanguage" style="width: 100%">
+                                                        <% for (var index = 0; index < languagesList.length; index++) { %>
+                                                            <option value="<%= languagesList[index] %>"><%= languagesList[index] %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+						<td><input type="image" name="insert_language" src="./images/user_interface/insert.png" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <table>
+                                                        <% for (var index = 0; index < languagesFilter.length; index++) { %>
+                                                            <tr>
+                                                                <td style="background: #ebebeb; text-align: left;">
+                                                                    <%= languagesFilter[index] %>
+                                                                </td>
+								<td><input type="image" name="delete_language_<%= languagesFilter[index] %>" src="./images/user_interface/delete.png" width="16" height="16" /></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table>
+						</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Category:</td>
+						<td>
+                                                    <select name="currentCategory" style="width: 100%">
+                                                        <% for (var index = 0; index < categoriesList.length; index++) { %>
+                                                            <option value="<%= categoriesList[index] %>"><%= categoriesList[index] %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+						<td><input type="image" name="insert_category" src="./images/user_interface/insert.png" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <table>
+                                                        <% for (var index = 0; index < categoriesFilter.length; index++) { %>
+                                                            <tr>
+                                                                <td style="background: #ebebeb; text-align: left;">
+                                                                    <%= categoriesFilter[index] %>
+                                                                </td>
+								<td><input type="image" name="delete_category_<%= categoriesFilter[index] %>" src="./images/user_interface/delete.png" width="16" height="16" /></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </table>
+						</td>
+                                            </tr>
+					</tbody>
+                                    </table>
+				</div>
+				<div id="wrapperbottom"></div>
+                            </div>
+			</td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: 60%; text-align: center">
+                            <% if (errorMessage) { %>
+	                        <span style="color: #ff0000;">
+                                    <%= errorMessage %>
+                                </span><br/>
+	                        <br/>
+				<br/>
+                            <% } %>
+                            <table border="0" cellpadding="4" cellspacing="1" style="margin: 0px auto;">
+                                <tbody>
+                                    <% for (var index = 0; index < books.length; index++) {
+                                        if (index >= ((pageValue - 1) * recordsPerPageValue) && index <= (pageValue * recordsPerPageValue - 1)) { %>
+                                            <tr>
+                                                <td>
+                                                    <div id="wrappertop"></div>
+                                                    <div id="wrappermiddle">
+                                                        <table style="width: 100%;" border="0" cellpadding="4" cellspacing="4">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td style="text-align: left">
+                                                                        <% var columns = Object.keys(books[index]);
+                                                                            for (var position = 0; position < columns.length; position++) {
+                                                                                if (columns[position] !== 'id' && columns[position] !== 'presentations') {
+                                                                        %>
+                                                                            <b><%= columns[position] %></b>: <%= books[index][columns[position]]%>
+                                                                            <br/>
+                                                                        <%      }
+                                                                            }
+                                                                            var presentations = books[index]['presentations'];
+                                                                        %>
+                                                                        <table style="width: 100%;">
+                                                                        <% for (var index2 = 0; index2 < presentations.length; index2++) { %>
+                                                                            <tr>
+                                                                                <td style="width: 100%; background: #ebebeb; text-align: left;">
+                                                                                    <% var columns = Object.keys(presentations[index2]);
+                                                                                        for (var position = 0; position < columns.length; position++) {
+                                                                                    %>
+                                                                                        <b><%= columns[position] %></b>: <%= presentations[index2][columns[position]] %>
+                                                                                        <br/>
+                                                                                    <% } %>
+                                                                                </td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td style="vertical-align: middle;">
+                                                                                    <% var bookPresentationIdentifier = presentations[index2]['id']; %>
+                                                                                    <table>
+                                                                                	<tr>
+                                                                                            <td>
+                                                                                                <input type="text" name="copies_shoppingcart_<%= bookPresentationIdentifier %>" size="3" />
+                                                                                                <br/>
+                                                                                                <input type="image" name="insert_shoppingcart_<%= bookPresentationIdentifier %>" value="insert" src="./images/user_interface/add_to_shopping_cart.png" />
+                                                                                            </td>
+											</tr>
+                                                                                    </table>
+										</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="2">&nbsp;</td>
+                                                                            </tr>
+                                                                        <% } %>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div id="wrapperbottom"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+						<td>&nbsp;</td>
+                                            </tr>
+                                        <% }
+                                    } %>
+                                </tbody>
+                            </table>
+                        </td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: 20%; text-align: left; vertical-align: top;">
+                            <div id="wrappertop"></div>
+                            <div id="wrappermiddle">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="text-align: center;">Shopping Cart ( <%= shoppingCart.length %> )</td>
+		                    </tr>
+                                    <% if (shoppingCart.length !== 0) { %>
+                                        <% var shoppingCartValue = 0; %>
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="4" cellspacing="1" style="width: 100%; background: #ffffff;">
+                                                    <tbody>
+                                                        <% for (var index = 0; index < shoppingCart.length; index++) { %>
+                                                            <% var currentBookValue = shoppingCart[index].quantity * shoppingCart[index].price %>
+                                                            <tr style="background: #ebebeb;">
+                                                                <td>
+                                                                    <%= shoppingCart[index].quantity %> x <%= shoppingCart[index].title %>
+                                                                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;(<%= shoppingCart[index].format %>, <%= shoppingCart[index].language %>)
+                                                                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;= <%= currentBookValue %>
+                                                                    <% shoppingCartValue += currentBookValue; %>
+                                                                </td>
+                                                            </tr>
+                                                        <% } %>
+                                                        <tr style="background: #ebebeb;">
+                                                            <td></td>
+                                                        </tr>
+				                        <tr style="background: #ebebeb;">
+                                                            <td>Order Total: <b><%= shoppingCartValue %></b></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">
+	                                        <input type="image" name="cancelcommand" value="Cancel Command" src="./images/user_interface/remove_from_shopping_cart.png" />
+	                                        &nbsp;&nbsp;
+	                                        <input type="image" name="completecommand" value="Complete Command" src="./images/user_interface/shopping_cart_accept.png" />
+	                                    </td>
+	                                </tr>
+                                    <% } else { %>
+                                        <tr>
+                                            <td style="text-align: center;">The shopping cart is empty!</td>
+                                        </tr>
+                                    <% } %>
+                                </table>
+                            </div>
+                            <div id="wrapperbottom"></div>
+			</td>
+                    </tr>
+		</tbody>
+            </table>
+        </form>
+    </body>
+</html>
